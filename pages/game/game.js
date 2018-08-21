@@ -12,7 +12,7 @@ Page({
     luckDrawCount: 10,  //  抽奖次数
     gameModalData: {},  //  奖品modal显示的数据（抽奖结果数据）
     rotateZPositionCount: 0, // 当前转盘的rotateZ 值
-    preUseRotateZ: 0,           // 上一次已抽奖中奖奖品的RotateZ累加
+    preUseRotateZ: 0,           // 上一次已抽奖中奖奖品的RotateZ
   },
   onLoad() {
   },
