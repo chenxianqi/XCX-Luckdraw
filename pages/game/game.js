@@ -9,8 +9,10 @@ Page({
     gameAnimation: null, //转盘动画
     gameState: false,   // 游戏状态
     gameModal: false,   // 模态框控制状态
-    luckDrawCount: 3,  //  抽奖次数
-    gameModalData: {}  //  奖品modal显示的数据（抽奖结果数据）
+    luckDrawCount: 10,  //  抽奖次数
+    gameModalData: {},  //  奖品modal显示的数据（抽奖结果数据）
+    rotateZPositionCount: 0, // 当前转盘的rotateZ 值
+    preUseRotateZ: 0,           // 上一次已抽奖中奖奖品的RotateZ累加
   },
   onLoad() {
   },
@@ -74,7 +76,6 @@ Page({
     // 判断游戏是否进行中
     if(this.data.gameState) return;
     // 判断是否还有抽奖资格
-    console.log(this.data.luckDrawCount)
     if(this.data.luckDrawCount <= 0){
       my.showToast({
         content: 'Sorry 您没有抽奖机会了',
@@ -88,23 +89,15 @@ Page({
   },
   // 游戏实现部分
   gameAnimationRun(rotateZPositionIndex){
-    //重置rotateZ = 0
-    var reAnimation = my.createAnimation({ // 动画实例
-        duration: 1,
-        timeFunction: 'ease'
-      });
-    reAnimation.rotateZ(0).step();
-    this.setData({
-      gameAnimation: reAnimation.export(),
-    })
 
     // 奖品指针位置20 一等奖，290二等奖，200，三等奖， 110 四等奖，68 五等奖，
     // 计算归着，每次抽奖最终rotateZ值 + 相应的奖品值位置 = (rotateZCount + rotateZPosition[0]) 等于一等奖
-    var rotateZPosition = [20,290, 200, 110, 68];
+    var rotateZPosition = [20, 290, 200, 110, 68];
 
     var rotateZ = 360;     // 一圈360deg
     var rotateZCount = 10; // 旋转圈数的倍数
-    var toRotateZCount = rotateZPosition[rotateZPositionIndex] + rotateZ * rotateZCount; // 达到圈数位置
+    /// 转盘位置计算规则 一圈360deg 乘以 10圈，加上 奖品 rotateZ值，再减去上一次中奖rotateZ值
+    var toRotateZCount = (this.data.rotateZPositionCount - this.data.preUseRotateZ + rotateZPosition[rotateZPositionIndex]) + rotateZ * rotateZCount; // 达到圈数位置
 
     var animation = my.createAnimation({ // 动画实例
       duration: 5000, // 动画持续5秒
@@ -121,6 +114,8 @@ Page({
     setTimeout(_=>{
       this.showModal();   // 当转盘停止显示模态框显示抽奖结果
       this.setData({ 
+        preUseRotateZ: rotateZPosition[rotateZPositionIndex], // 上一次奖品
+        rotateZPositionCount: toRotateZCount,              // 记录当前转盘rotateZ 值
         luckDrawCount: this.data.luckDrawCount-1,          // 抽奖次数减一
         gameState: false,                                   // 将转盘状态切换为可抽奖
         gameModalData: this.prizeData(rotateZPositionIndex) // 设置奖品数据
