@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "pages/game/game"
+  ],
+  "window": {
+    "defaultTitle": "game"
+  }
+}

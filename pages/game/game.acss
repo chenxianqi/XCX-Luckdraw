@@ -1,0 +1,19 @@
+.container{width: 750rpx; position: relative;}
+.container .game-bg{width: 750rpx;}
+.container .game-bg image{width: 750rpx;height:280rpx; display: block;}
+.container .game-box{width:602rpx; height:604rpx; position: absolute;margin: 0 auto; top: 685rpx;left:0; right:0;}
+.container .game-box .wheel{width:602rpx; height:604rpx;  position: absolute; top:0; left:0;}
+.container .game-box .wheel image{width:602rpx; height:604rpx; }
+.container .game-box .arrow{width:167rpx; height:239rpx; position: absolute; top:0; left:0; right:0; bottom:70rpx; margin: auto; z-index: 2;}
+.container .game-box .arrow image{width:167rpx; height:239rpx;}
+.container .a-time{color: #d33625; font-size:28rpx; text-align: center; position: absolute; bottom:50rpx;width:750rpx; left:0;}
+.container .game-modal{width:100vw; height:100vh; position: fixed; top:0; left:0; z-index: 99}
+.container .game-modal-mask{width:100vw; height:100vh; position: absolute; top:0; left:0; z-index: 0; background-color: rgba(0,0,0,0.5)}
+.container .game-modal-content{width:635rpx; height:749rpx; position: absolute; top:0; left:0; bottom:0; right:0; margin: auto;}
+.container .game-modal-content image{width:635rpx; height:749rpx; }
+.container .game-modal-title{width:100%; text-align: center;color: #ea5328;font-size: 48rpx;position: absolute; top: 95rpx;}
+.container .prize{width:100%; text-align: center;color: #ea5328;font-weight: bold;font-size: 68rpx;position: absolute; top: 245rpx;}
+.container .action-btn{width:330rpx; height:100rpx; position: absolute; top:380rpx;left:0; right:0; margin: 0 auto; opacity: 0;}
+.container .close{width:100rpx;height:100rpx; background-color: #ccc; border-radius: 50%; position: absolute; bottom:0; left:0; right:0; margin: 0 auto; opacity: 0}
+.container .invalid-date{width:100%;text-align: center; position: absolute; bottom:207rpx;color: #ffffff;font-size: 32rpx;}
+
